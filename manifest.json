@@ -1,0 +1,30 @@
+
+
+{
+  "manifest_version": 2,
+  "name": "5.6(6) toes on avg",
+  "version": "1.0",
+  "description": "Making blind people see",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://kood.tech/*"    
+      ],
+
+      "js": ["content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "output.png",  
+    "48": "output.png",   
+    "128": "output.png"  
+  },
+  "manifest_version": 2
+}
+
