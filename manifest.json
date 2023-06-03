@@ -6,17 +6,23 @@
   "version": "1.0",
   "description": "Making blind people see",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "content_scripts": [
     {
       "matches": [
-        "*"    
+        "https://volleyball.ee/*",
+        "https://kood.tech/*"
       ],
 
       "js": ["content.js"]
     }
   ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "browser_action": {
     "default_popup": "popup.html"
   },
@@ -24,7 +30,6 @@
     "16": "output.png",  
     "48": "output.png",   
     "128": "output.png"  
-  },
-  "manifest_version": 2
+  }
 }
 
