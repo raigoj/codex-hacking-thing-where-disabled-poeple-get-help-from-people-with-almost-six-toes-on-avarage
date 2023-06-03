@@ -6,31 +6,47 @@ document.body.style.backgroundColor = 'lightblue';
 const imageElements = document.querySelectorAll("img");
 
 if (imageElements.length > 0) {
-  const imageTextPairs = [];
+    const imageTextPairs = [];
 
-  // Loop through each image element
-  for (const imageElement of imageElements) {
-    let nearestText = null;
-    let parentElement = imageElement.parentElement;
+    // Loop through each image element
+    for (const imageElement of imageElements) {
+        let nearestText = null;
+        let currentNode = imageElement.parentNode;
 
-    while (parentElement) {
-      const textElements = parentElement.querySelectorAll("p, span, div"); // Adjust the selector to match the text elements you want to include
+        while (currentNode && currentNode !== document.body) {
+            if (currentNode.innerText.trim() !== '') {
+                nearestText = currentNode.innerText.trim();
+                break;
+            }
+            currentNode = currentNode.parentNode;
+        }
 
-      if (textElements.length > 0) {
-        nearestText = textElements[0].textContent.trim();
-        break;
-      }
-
-      parentElement = parentElement.parentElement;
+        const imageURL = imageElement.src;
+        imageTextPairs.push({ image: imageURL, text: nearestText });
     }
 
-    const imageURL = imageElement.src;
-    imageTextPairs.push({ image: imageURL, text: nearestText });
-  }
-
-  // Send the image-text pairs to the background script
-  chrome.runtime.sendMessage({ imageTextPairs });
+    // Send the image-text pairs to the background script
+    chrome.runtime.sendMessage({ imageTextPairs });
 } else {
-  console.log("No image elements found on the webpage.");
+    console.log("No image elements found on the webpage.");
 }
 
+
+
+// Function to find the associated text for an image
+// function getAssociatedText(image) {
+//     let associatedText = '';
+//       let depth_lvl = 0
+//     // Find the nearest parent element containing text
+//     let currentNode = image.parentNode;
+//     while (currentNode && currentNode !== document.body) {
+//       depth_lvl +=1
+//       if (currentNode.innerText.trim() !== '') {
+//         associatedText = currentNode.innerText.trim();
+//         break;
+//       }
+//       currentNode = currentNode.parentNode;
+//     }
+//     console.log("Depth:", depth_lvl)
+//     return associatedText;
+//   }
