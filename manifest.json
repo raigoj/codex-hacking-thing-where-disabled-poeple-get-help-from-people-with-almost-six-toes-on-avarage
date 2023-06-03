@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://kood.tech/*"    
+        "*"    
       ],
 
       "js": ["content.js"]
