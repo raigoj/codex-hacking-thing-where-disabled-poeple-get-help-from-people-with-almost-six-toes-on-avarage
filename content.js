@@ -32,21 +32,3 @@ if (imageElements.length > 0) {
 }
 
 
-
-// Function to find the associated text for an image
-// function getAssociatedText(image) {
-//     let associatedText = '';
-//       let depth_lvl = 0
-//     // Find the nearest parent element containing text
-//     let currentNode = image.parentNode;
-//     while (currentNode && currentNode !== document.body) {
-//       depth_lvl +=1
-//       if (currentNode.innerText.trim() !== '') {
-//         associatedText = currentNode.innerText.trim();
-//         break;
-//       }
-//       currentNode = currentNode.parentNode;
-//     }
-//     console.log("Depth:", depth_lvl)
-//     return associatedText;
-//   }
