@@ -1,10 +1,28 @@
 // Listen for messages from the content script
-chrome.runtime.onMessage.addListener(function(request, imageTextPairs) {
-  // Access the received images and text
-  const imgTxtPairs = request.imageTextPairs;
-  //const text = request.text;
+chrome.runtime.onMessage.addListener(function (data, request) {
+  // Access the received images and text data.image, data.text
+  console.log("wait...")
+  const apiKey = '...'
+  fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      "model": 'gpt-4',
+      "messages":[{ "role": "user", "content": `Give me in a few words a good alt for this image: ${data.image} based on this text: ${data.text}. In case wher e text is not relavent to image provide alt text only based on image.`}],
+      "max_tokens": 50
+    }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the response data
+      console.log("Got response", data);
+    })
+    .catch(error => {
+      // Handle any errors
+      console.error('Error:', error);
+    })
 
-  // Perform desired actions with the images and text
-  console.log(imgTxtPairs);
-  //console.log(text);
 });
