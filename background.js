@@ -4,7 +4,10 @@ let result = chrome.runtime.onMessage.addListener(function (data, request) {
   chrome.storage.local.get("userInput", function (result) {
     apiKey = result.userInput
     getGPTResponse(apiKey, data)
-      .then(res => console.log(res))
+      .then(res => {
+        // Send a message f to the popup script
+        chrome.runtime.sendMessage({ data: [res.choices[0].message.content, 'two', 'three'] });
+      })
   });
 });
 
