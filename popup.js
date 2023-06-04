@@ -10,44 +10,26 @@ let imageTextPairs = [];
 let imageElement
 
 document.addEventListener("DOMContentLoaded", function () {
-	let currentImageIndex = 0;
-	let imageTextPairs = [];
-
-	const imageElement = document.getElementById("imageElement");
-	const textElement = document.getElementById("textElement");
-	const prevButton = document.getElementById("prevButton");
-	const nextButton = document.getElementById("nextButton");
-	const getAltButton = document.getElementById("getAltButton");
-	const boxOne = document.getElementById("boxOne");
-	const boxTwo = document.getElementById("boxTwo");
-	const boxThree = document.getElementById("boxThree");
-
-	// Function to update the image and text based on the current index
-	function updateImageAndText() {
-		const imageSrc = imageTextPairs[currentImageIndex].image;
-		const textContent = imageTextPairs[currentImageIndex].text;
-		imageElement.src = imageSrc;
-		textElement.textContent = textContent;
-	}
-
-document.addEventListener("DOMContentLoaded", function () {
 	saveApiKeyLocaly()
 	updateAltTexts()
 
 	imageElement = document.getElementById("imageElement");
 
+	const boxOne = document.getElementById("1-alt");
 	boxOne.addEventListener("click", function () {
 		var text = boxOne.textContent;
 		navigator.clipboard.writeText(text);
 		showNotification();
 	});
-
+	
+	const boxTwo = document.getElementById("2-alt");
 	boxTwo.addEventListener("click", function () {
 		var text = boxTwo.textContent;
 		navigator.clipboard.writeText(text);
 		showNotification();
 	});
-
+	
+	const boxThree = document.getElementById("3-alt");
 	boxThree.addEventListener("click", function () {
 		var text = boxThree.textContent;
 		navigator.clipboard.writeText(text);
@@ -84,13 +66,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		getImageTextPairs(tab)
 		getImageUrl(tab)
 	});
+})
 
 // Listen for messages from the background script
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	console.log('Message received in the popup script:', message);
 	alt_texts = message.data
 	updateAltTexts()
-});
+})
 
 function getImageTextPairs(tab) {
 	chrome.tabs.sendMessage(tab.id, { action: "getData" }, function (response) {
@@ -151,6 +134,7 @@ function updateImageAndText() {
 	alt_texts = ['', '', '']
 	updateAltTexts()
 }
+
 function updateAltTexts() {
 	for (let i = 0; i < 3; i++) {
 		document.getElementById(`${i + 1}-alt`).innerText = alt_texts[i]
