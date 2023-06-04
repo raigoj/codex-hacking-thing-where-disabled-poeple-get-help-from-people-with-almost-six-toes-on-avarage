@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>Your Extension Popup</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
 
-<head>
-  <title>Your Extension Popup</title>
-  <link rel="stylesheet" href="style.css">
+	<body>
+		<h1 id="message">get that Alt</h1>
+		<div class="btn-container">
+			<button id="prevButton">&lt;</button>
+			<button id="getAltButton">ALT</button>
+			<button id="nextButton">&gt;</button>
+		</div>
+		<div class="image-container">
+			<img id="imageElement" src="" alt="Selected Image" />
+		</div>
 
-</head>
+		<div id="notification">Text Copied</div>
+		<div class="alt-container">
+			<p class="altElement" id="boxOne">This is one really good sugestion</p>
+			<p class="altElement" id="boxTwo">
+				This is another really good sugestion, but looooooooooooonnnnnnnnngggggg
+			</p>
+			<p class="altElement" id="boxThree">This is third. A bit sad one.</p>
+		</div>
 
-<body>
-  <h1 id="message">get that Alt</h1>
-  <div class="btn-container">
-    <button id="prevButton">&lt;</button>
-    <button id="getAltButton">ALT</button>
-    <button id="nextButton">&gt;</button>
-  </div>
-  <div class="image-container">
-    <img id="imageElement" src="" alt="Selected Image">
-  </div>
-
-  <div class="alt-container">
-    <p class="altElement">This is one really good sugestion</p>
-    <p class="altElement">This is another really good sugestion, but looooooooooooonnnnnnnnngggggg</p>
-    <p class="altElement">This is third. A bit sad one.</p>
-  </div>
-
-  <script src="popup.js"></script>
-</body>
-
+		<script src="popup.js"></script>
+	</body>
 </html>

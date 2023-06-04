@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 	const prevButton = document.getElementById("prevButton");
 	const nextButton = document.getElementById("nextButton");
 	const getAltButton = document.getElementById("getAltButton");
+	const boxOne = document.getElementById("boxOne");
+	const boxTwo = document.getElementById("boxTwo");
+	const boxThree = document.getElementById("boxThree");
 
 	// Function to update the image and text based on the current index
 	function updateImageAndText() {
@@ -53,6 +56,24 @@ document.addEventListener("DOMContentLoaded", function () {
 		);
 	}
 
+	boxOne.addEventListener("click", function () {
+		var text = boxOne.textContent;
+		navigator.clipboard.writeText(text);
+		showNotification();
+	});
+
+	boxTwo.addEventListener("click", function () {
+		var text = boxTwo.textContent;
+		navigator.clipboard.writeText(text);
+		showNotification();
+	});
+
+	boxThree.addEventListener("click", function () {
+		var text = boxThree.textContent;
+		navigator.clipboard.writeText(text);
+		showNotification();
+	});
+
 	// Event listener for the previous button
 	prevButton.addEventListener("click", goToPreviousImage);
 
@@ -64,16 +85,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	//add alternative navigation
 
-	document.addEventListener('keydown', function (event) {
-		if (event.key === 'ArrowLeft') {
-			prevButton.click()
-		} else if (event.key === 'ArrowRight') {
-			nextButton.click()
-		} else if (event.key === 'Enter') {
-			getAltButton.click()
+	document.addEventListener("keydown", function (event) {
+		if (event.key === "ArrowLeft") {
+			prevButton.click();
+		} else if (event.key === "ArrowRight") {
+			nextButton.click();
+		} else if (event.key === "Enter") {
+			getAltButton.click();
 		}
-
-	})
+	});
 
 	// Send a message to the content script to retrieve the image and text data
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -96,11 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		);
 	});
-});
 
-// Saving API key locally
-document.addEventListener("DOMContentLoaded", function () {
-	// Check if user input is already stored in local storage
 	chrome.storage.local.get("userInput", function (result) {
 		if (result.userInput) {
 			// User input is already stored, use it
@@ -123,4 +139,21 @@ function processUserInput(userInput) {
 	// Perform actions with the user input
 	console.log("User input:", userInput);
 	// Rest of your code here
+}
+
+function showNotification() {
+	var notification = document.getElementById("notification");
+
+	notification.style.display = "block";
+	setTimeout(function () {
+		notification.style.opacity = 1;
+	}, 10);
+
+	setTimeout(function () {
+		notification.style.opacity = 0;
+	}, 2000);
+
+	setTimeout(function () {
+		notification.style.display = "none";
+	}, 2500);
 }
