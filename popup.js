@@ -3,7 +3,7 @@
 // This script will run when the extension's popup is opened.
 
 // Example: Display a message when the popup is opened
-document.getElementById("message").textContent = "Hello, Chrome Extension!";
+// document.getElementById("message").textContent = "Hello, Chrome Extension!";
 
 document.addEventListener("DOMContentLoaded", function () {
 	let currentImageIndex = 0;
@@ -64,13 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	//add alternative navigation
 
-	document.addEventListener('keyup', function (event) {
+	document.addEventListener('keydown', function (event) {
 		if (event.key === 'ArrowLeft') {
-			goToPreviousImage()
+			prevButton.click()
 		} else if (event.key === 'ArrowRight') {
-			goToNextImage()
+			nextButton.click()
 		} else if (event.key === 'Enter') {
-			getAltDescription()
+			getAltButton.click()
 		}
 
 	})

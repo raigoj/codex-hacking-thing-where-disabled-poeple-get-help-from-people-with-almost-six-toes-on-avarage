@@ -1,39 +1,28 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Your Extension Popup</title>
-    <style>
-    .image-container {
-      text-align: center;
-    }
-
-    .image-container img {
-      max-width: 300px;
-      max-height: 300px;
-    }
-
-    .text-container {
-      margin-top: 10px;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
-  <h1 id="message"></h1>
-  <script src="popup.js"></script> 
-  <body>
+  <h1 id="message">get that Alt</h1>
+  <div class="btn-container">
+    <button id="prevButton">&lt;</button>
+    <button id="getAltButton">ALT</button>
+    <button id="nextButton">&gt;</button>
+  </div>
   <div class="image-container">
     <img id="imageElement" src="" alt="Selected Image">
   </div>
-  <div class="text-container">
-    <p id="textElement"></p>
-  </div>
-  <div>
-    <button id="prevButton">&lt;</button>
-    <button id="nextButton">&gt;</button>
-    <button id="getAltButton">get Alt</button>
-  </div>
-</body>
-</html>
 
+  <div class="alt-container">
+    <p id="altElement"></p>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
