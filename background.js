@@ -1,8 +1,9 @@
 // Listen for messages from the content script
+require('dotenv').config();
 chrome.runtime.onMessage.addListener(function (data, request) {
   // Access the received images and text data.image, data.text
   console.log("wait...")
-  const apiKey = '...'
+  const apiKey = process.env.API_TOKEN
   fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
