@@ -6,7 +6,7 @@ let result = chrome.runtime.onMessage.addListener(function (data, request) {
     getGPTResponse(apiKey, data)
       .then(res => {
         // Send a message f to the popup script
-        chrome.runtime.sendMessage({ data: [res.choices[0].message.content, 'two', 'three'] });
+        chrome.runtime.sendMessage({ data: [res.choices[0].message.content, res.choices[1].message.content, res.choices[2].message.content] });
       })
   });
 });
@@ -27,11 +27,13 @@ function getGPTResponse(apiKey, data) {
         },
       ],
       max_tokens: 50,
+      n: 3,
     }),
   })
     .then((response) => response.json())
     .then((data) => {
       // Handle the response data
+      console.log(data)
       return data
     })
     .catch((error) => {
