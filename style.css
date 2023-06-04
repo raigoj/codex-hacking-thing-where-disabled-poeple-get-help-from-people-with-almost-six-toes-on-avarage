@@ -1,6 +1,7 @@
 :root {
   --accent: #4a0e6d;
   --dark: #272626;
+  --darker: #181717;
   --light: #ffffff;
   --gray: #726e6e;
 }
@@ -53,4 +54,16 @@ button:focus {
 .alt-container {
   margin-top: 10px;
   text-align: center;
+}
+
+.altElement{
+  margin: 10px;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 30px;
+  background-color: var(--darker);
+  cursor:pointer;
+}
+.altElement:hover{
+  border: 1px solid var(--light);
 }
