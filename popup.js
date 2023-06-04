@@ -3,7 +3,7 @@
 // This script will run when the extension's popup is opened.
 
 // Example: Display a message when the popup is opened
-document.getElementById("message").textContent = "Hello, Chrome Extension!";
+// document.getElementById("message").textContent = "Hello, Chrome Extension!";
 
 document.addEventListener("DOMContentLoaded", function () {
 	let currentImageIndex = 0;
@@ -61,6 +61,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// Event listener for the get Alt button
 	getAltButton.addEventListener("click", getAltDescription);
+
+	//add alternative navigation
+
+	document.addEventListener('keydown', function (event) {
+		if (event.key === 'ArrowLeft') {
+			prevButton.click()
+		} else if (event.key === 'ArrowRight') {
+			nextButton.click()
+		} else if (event.key === 'Enter') {
+			getAltButton.click()
+		}
+
+	})
 
 	// Send a message to the content script to retrieve the image and text data
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
