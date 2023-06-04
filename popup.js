@@ -10,10 +10,49 @@ let imageTextPairs = [];
 let imageElement
 
 document.addEventListener("DOMContentLoaded", function () {
+	let currentImageIndex = 0;
+	let imageTextPairs = [];
+
+	const imageElement = document.getElementById("imageElement");
+	const textElement = document.getElementById("textElement");
+	const prevButton = document.getElementById("prevButton");
+	const nextButton = document.getElementById("nextButton");
+	const getAltButton = document.getElementById("getAltButton");
+	const boxOne = document.getElementById("boxOne");
+	const boxTwo = document.getElementById("boxTwo");
+	const boxThree = document.getElementById("boxThree");
+
+	// Function to update the image and text based on the current index
+	function updateImageAndText() {
+		const imageSrc = imageTextPairs[currentImageIndex].image;
+		const textContent = imageTextPairs[currentImageIndex].text;
+		imageElement.src = imageSrc;
+		textElement.textContent = textContent;
+	}
+
+document.addEventListener("DOMContentLoaded", function () {
 	saveApiKeyLocaly()
 	updateAltTexts()
 
 	imageElement = document.getElementById("imageElement");
+
+	boxOne.addEventListener("click", function () {
+		var text = boxOne.textContent;
+		navigator.clipboard.writeText(text);
+		showNotification();
+	});
+
+	boxTwo.addEventListener("click", function () {
+		var text = boxTwo.textContent;
+		navigator.clipboard.writeText(text);
+		showNotification();
+	});
+
+	boxThree.addEventListener("click", function () {
+		var text = boxThree.textContent;
+		navigator.clipboard.writeText(text);
+		showNotification();
+	});
 
 	// Event listener for the previous button
 	const prevButton = document.getElementById("prevButton");
@@ -28,15 +67,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	getAltButton.addEventListener("click", getAltDescription);
 
 	//add alternative navigation
-	document.addEventListener('keydown', function (event) {
-		if (event.key === 'ArrowLeft') {
-			prevButton.click()
-		} else if (event.key === 'ArrowRight') {
-			nextButton.click()
-		} else if (event.key === 'Enter') {
-			getAltButton.click()
+
+	document.addEventListener("keydown", function (event) {
+		if (event.key === "ArrowLeft") {
+			prevButton.click();
+		} else if (event.key === "ArrowRight") {
+			nextButton.click();
+		} else if (event.key === "Enter") {
+			getAltButton.click();
 		}
-	})
+	});
 
 	// Send a message to the content script to retrieve the image and text data
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -44,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		getImageTextPairs(tab)
 		getImageUrl(tab)
 	});
-});
 
 // Listen for messages from the background script
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -144,4 +183,21 @@ function processUserInput(userInput) {
 	// Perform actions with the user input
 	console.log("User input:", userInput);
 	// Rest of your code here
+}
+
+function showNotification() {
+	var notification = document.getElementById("notification");
+
+	notification.style.display = "block";
+	setTimeout(function () {
+		notification.style.opacity = 1;
+	}, 10);
+
+	setTimeout(function () {
+		notification.style.opacity = 0;
+	}, 2000);
+
+	setTimeout(function () {
+		notification.style.display = "none";
+	}, 2500);
 }
