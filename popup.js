@@ -62,6 +62,19 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Event listener for the get Alt button
 	getAltButton.addEventListener("click", getAltDescription);
 
+	//add alternative navigation
+
+	document.addEventListener('keyup', function (event) {
+		if (event.key === 'ArrowLeft') {
+			goToPreviousImage()
+		} else if (event.key === 'ArrowRight') {
+			goToNextImage()
+		} else if (event.key === 'Enter') {
+			getAltDescription()
+		}
+
+	})
+
 	// Send a message to the content script to retrieve the image and text data
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		const tab = tabs[0];
